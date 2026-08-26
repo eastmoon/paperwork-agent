@@ -1,0 +1,11 @@
+{
+  "name": "paperwork-agent",
+  "owner": { "name": "jacky.eastmoon" },
+  "plugins": [
+    {
+      "name": "paperwork-agent",
+      "source": "./",
+      "description": "文書工作代理人"
+    }
+  ]
+}
