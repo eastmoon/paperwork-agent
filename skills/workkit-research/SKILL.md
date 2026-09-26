@@ -54,7 +54,7 @@ $ARGUMENTS
 
 ### 1. 載入樣板
 
-+ RESEARCH_TEMPLATE_PATH : `{{CLAUDE_SKILL_DIR}}/research-template.md`
++ RESEARCH_TEMPLATE_PATH : `${CLAUDE_SKILL_DIR}/research-template.md`
 + 讀取憲章檔案 `{{RESEARCH_TEMPLATE_PATH}}`。
   - 辨識所有形如 `[ALL_CAPS_IDENTIFIER]` 的預留符標記。
   - **重要提示**：使用者可能需要比範本中使用的原則數量更少或更多的原則。請遵循實際的原則數量更新文檔。
@@ -75,6 +75,24 @@ $ARGUMENTS
   - 次要版本：新增了原則或章節，亦或大幅擴展與補充了具體的指導方針。
   - 補丁版本：澄清、措詞、拼字錯誤修復、非語意改進。
 + 如果版本號遞增類型不明確，請在最終確定之前提出理由。
+
+### 2.1 驗證範例程式 ( 僅於 RESEARCH_EXAMPLE_LANG 不為空時執行 )
+
++ RESEARCH_SKILL_NAME : `${CLAUDE_SKILL_DIR}` 的最後一層目錄名稱，轉為小寫，`a-z`、`0-9` 以外的字元改為 `-`，並去除首尾的 `-`
++ RESEARCH_VERIFY_HASH : {{RESEARCH_DOCUMENT_PATH}} 去除前後空白、以 `/` 分隔後，以 UTF-8 ( 無 BOM、無結尾換行 ) 計算的 MD5 小寫十六進位字串
++ RESEARCH_VERIFY_DIR : `${CLAUDE_PROJECT_DIR}/.claude/verify/{{RESEARCH_VERIFY_HASH}}`，路徑分隔符號統一為 `/`
+  - `meta.json`：研究項目、輸出文件、程式語言、映像檔名稱、驗證方式、驗證日期
+  - `Dockerfile`：鎖定基底映像檔版本，於建置階段安裝相依套件，以 `WORKDIR /work` 與 `CMD` 執行驗證程式
+  - `.dockerignore`：排除 `out/`
+  - `src/`：各原則的範例程式與驗證程式，驗證程式以結束碼表示成敗
+  - `out/`：執行紀錄，不納入版本控制
++ RESEARCH_VERIFY_IMAGE : `{{RESEARCH_SKILL_NAME}}:{{RESEARCH_VERIFY_HASH}}`
++ 偵測容器服務：`docker info` 結束碼為 0，且 OSType 為 `linux`
+  - 未安裝、服務未啟動、無權限 → 說明原因，詢問使用者是否啟動後重試；使用者拒絕 → 改用邏輯檢查
++ 建置：`docker build -t {{RESEARCH_VERIFY_IMAGE}} "{{RESEARCH_VERIFY_DIR}}"`
++ 執行：`docker run --rm --network none --mount "type=bind,src={{RESEARCH_VERIFY_DIR}},dst=/work" {{RESEARCH_VERIFY_IMAGE}}`
++ 建置或驗證失敗 → 修正範例或 Dockerfile 後重試，**不可** 改以邏輯檢查取代
++ 文件中的範例程式碼 **必須** 與驗證通過的檔案一致，並標示驗證方式 ( Docker 實測 / 邏輯檢查 ) 與環境版本
 
 ### 3. 更新樣板內容
 
