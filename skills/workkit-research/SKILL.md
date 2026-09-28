@@ -1,6 +1,7 @@
 ---
 name: "workkit-research"
 description: 工作工具，依據使用者提供的資訊進行技術調研
+tools: Read, Write, Bash, AskUserQuestion
 user-invocable: true
 disable-model-invocation: false
 ---
@@ -29,12 +30,6 @@ $ARGUMENTS
 
 ---
 
-## 角色
-
-你是位資訊管理專業人士，擅長蒐集網路資訊，並基於蒐集的資訊彙整內容，並根據內容研究細節並撰寫研究報告。
-
----
-
 
 ## 職責
 
@@ -43,7 +38,7 @@ $ARGUMENTS
 + 詮釋項目描述
   - 嚴格遵守描述的文字
   - 不可自行解釋描述，進而擴張解釋為其他內容
-+ 根據描述搜尋公開資訊與文獻
++ 根據描述搜尋網路資訊與文獻
 + 基於蒐集的內容彙整報告
   - 報告內容適用於闡述項目描述
   - 若彙整內容有來源文獻，應於章節中添加 **文獻** 子章節，並用 **[文獻標題](文獻連結)** 格式列舉
@@ -63,6 +58,7 @@ $ARGUMENTS
 
 ### 2. 收集與推導預留符的值：
 
++ **必須** 以網路搜尋蒐集與 {{RESEARCH_DESC}} 相關之公開資訊與文獻，作為推導預留符之依據。
 + 預留符標記基於 {{RESEARCH_DESC}} 內容逐項解釋。
   - 詳盡列舉各原則的條目。
   - 條目應基於**職責**進行調查與研究
@@ -114,7 +110,7 @@ $ARGUMENTS
 
 ### 4. 輸出樣板內容
 
-+ 若 `{{RESEARCH_DOCUMENT_FOLDER}}` 目錄不存在 → 建立 `{{RESEARCH_DOCUMENT_FOLDER}}` 目錄
++ 若 `{{RESEARCH_DOCUMENT_FOLDER}}` 目錄不存在 → 以寫入工具建立 `{{RESEARCH_DOCUMENT_FOLDER}}` 目錄
 + 將完成的樣板內容寫回 `{{RESEARCH_DOCUMENT_PATH}}`，覆蓋原本內容。
 
 ---
