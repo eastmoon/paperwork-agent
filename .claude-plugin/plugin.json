@@ -1,6 +1,6 @@
 {
   "name": "paperwork-agent",
   "description": "文書工作代理人",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "skills": "./skills/"
 }

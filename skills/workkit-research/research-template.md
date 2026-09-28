@@ -1,6 +1,11 @@
 # Research : [RESEARCH_TOPIC]
 <!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
-<!-- [ARGUMENTS] -->
+<!--
+# 調研描述
+[${ARGUMENTS}]
+# 驗證與檢測
++ verify program path : [${RESEARCH_VERIFY_DIR} but not include ${CLAUDE_PROJECT_DIR} path]
+-->
 
 ## [SECTION_1_NAME]
 <!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
