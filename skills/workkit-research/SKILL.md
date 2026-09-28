@@ -68,6 +68,9 @@ $ARGUMENTS
   - 條目應基於**職責**進行調查與研究
 + 對於範例：各原則的 `PRINCIPLE_N_EXAMPLE` 是否輸出與使用的程式語言，一律依本次 {{RESEARCH_EXAMPLE_LANG}} 決定。
   - 若 {{RESEARCH_EXAMPLE_LANG}} 不為空 → 以 {{RESEARCH_EXAMPLE_LANG}} 指定的程式語言與資訊 ( 如版本、框架、函式庫 ) 撰寫範例程式，展示該原則如何運作。
+    + 詢問使用者 **使用邏輯檢查** 還是 **驗證範例程式檢查**
+      - 若為 **使用邏輯檢查** → 對於範例程式僅用邏輯檢查
+      - 若未 **驗證範例程式檢查** → 依據 2.1 節細則執行
   - 若 {{RESEARCH_EXAMPLE_LANG}} 為空 → 無需設計範例，並於步驟 3 刪除 **EXAMPLE** 區塊。
 + 對於治理日期：`RATIFICATION_DATE` 為原始通過日期 ( 如果未知，請詢問或標記為待辦事項 )，`LAST_AMENDED_DATE` 為當前日期 ( 果進行了更改 )，否則保留先前的日期。
 + `CONSTITUTION_VERSION` 必須依照語意版本控制規則遞增：
